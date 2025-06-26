@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tra cứu tuyển sinh - Trường Tiểu học Hà Khẩu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eef6fc;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #003366;
+      margin-bottom: 10px;
+    }
+
+    .input-box {
+      margin: 20px auto;
+      width: 300px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0066cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
+      padding-left: 20px;
+    }
+
+    .result div:nth-child(odd) {
+      background-color: #d0eaff;
+    }
+
+    .result div:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    .result div {
+      padding: 8px;
+      margin: 5px auto;
+      border-radius: 6px;
+      width: 90%;
+    }
+
+    .note {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #cc0000;
+    }
+  </style>
+</head>
+<body>
+  <h1>TRA CỨU KẾT QUẢ TUYỂN SINH LỚP 1<br>Trường Tiểu học Hà Khẩu<br>NĂM HỌC 2025 - 2026</h1>
+  <div class="input-box">
+    <input type="text" id="hoTen" placeholder="Nhập họ tên học sinh" />
+    <input type="text" id="maDinhDanh" placeholder="Nhập mã định danh" />
+    <button onclick="traCuu()">Tra cứu</button>
+  </div>
+  <div id="ketQua" class="result"></div>
+  <div class="note">Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ số điện thoại: <strong>0906 162 184</strong></div>
+
+  <script>
+    let duLieu = [];
+
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => duLieu = data);
+
+    function traCuu() {
+      const hoTen = document.getElementById("hoTen").value.trim().toLowerCase();
+      const maDinhDanh = document.getElementById("maDinhDanh").value.trim();
+      const ketQua = document.getElementById("ketQua");
+      ketQua.innerHTML = "";
+
+      const hs = duLieu.find(item =>
+        item["Họ tên"].trim().toLowerCase() === hoTen &&
+        item["Mã định danh của HS"].toString().trim() === maDinhDanh
+      );
+
+      if (hs) {
+        ketQua.innerHTML = `
+          <div>🔸 Họ tên học sinh: <strong>${hs["Họ tên"]}</strong></div>
+          <div>🔸 Ngày sinh: <strong>${hs["Ngày tháng năm sinh"]}<strong></div>
+          <div>🔸 Mã định danh: <strong>${hs["Mã định danh của HS"]}<strong></div>
+          <div>🔸 Nơi sinh: <strong>${hs["Nơi sinh (Huyện, tỉnh)"]}<strong></div>
+          <div>🔸 Nơi ở hiện tại: <strong>${hs["Nơi ở hiện tại"]}<strong></div><br>
+          <div>❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
+          <div>❤️ Chào mừng em là học sinh của lớp: <strong>${hs["Học lớp"]}<strong></div>
+          <div>❤️ Do cô giáo <strong>${hs["Giáo viên chủ nhiệm"]}</strong> chủ nhiệm</div>
+          
+        `;
+      } else {
+        ketQua.innerHTML = "<div>❗Không tìm thấy học sinh. Vui lòng kiểm tra lại họ tên và mã định danh.</div>";
+      }
+    }
+  </script>
+</body>
+</html>
