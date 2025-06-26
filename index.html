@@ -2,49 +2,56 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <title>Tra cứu tuyển sinh - Trường Tiểu học Hà Khẩu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tra cứu tuyển sinh - Tiểu học Hà Khẩu</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #eef6fc;
-      text-align: center;
       padding: 20px;
+      margin: 0;
     }
 
     h1 {
       color: #003366;
-      margin-bottom: 10px;
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     .input-box {
-      margin: 20px auto;
-      width: 300px;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     input {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
+      padding: 14px;
+      margin: 10px 0;
+      font-size: 18px;
+      border-radius: 8px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
     }
 
     button {
-      padding: 10px 20px;
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
       background-color: #0066cc;
       color: white;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 8px;
       cursor: pointer;
     }
 
     .result {
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 30px;
+      font-size: 20px;
       font-weight: 500;
       text-align: left;
-      padding-left: 20px;
+      line-height: 1.6;
+      padding-left: 10px;
     }
 
     .result div:nth-child(odd) {
@@ -56,15 +63,15 @@
     }
 
     .result div {
-      padding: 8px;
-      margin: 5px auto;
+      padding: 10px;
       border-radius: 6px;
-      width: 90%;
+      margin: 6px 0;
     }
 
     .note {
-      margin-top: 30px;
-      font-size: 16px;
+      margin-top: 40px;
+      font-size: 18px;
+      text-align: center;
       color: #cc0000;
     }
   </style>
@@ -99,14 +106,13 @@
 
       if (hs) {
         ketQua.innerHTML = `
-          <div>🔸 Họ tên học sinh: <strong>${hs["Họ tên"]}</strong></div>
-          <div>🔸 Ngày sinh: <strong>${hs["Ngày tháng năm sinh"]}<strong></div>
-          <div>🔸 Mã định danh: <strong>${hs["Mã định danh của HS"]}<strong></div>
-          <div>🔸 Nơi sinh: <strong>${hs["Nơi sinh (Huyện, tỉnh)"]}<strong></div>
-          <div>🔸 Nơi ở hiện tại: <strong>${hs["Nơi ở hiện tại"]}<strong></div><br>
-          <div>❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
-          <div>❤️ Chào mừng em là học sinh của lớp: <strong>${hs["Học lớp"]}<strong></div>
-          <div>❤️ Do cô giáo <strong>${hs["Giáo viên chủ nhiệm"]}</strong> chủ nhiệm</div>
+          <div>❤️ Họ tên học sinh: <strong>${hs["Họ tên"]}</strong></div>
+          <div>❤️ Mã định danh: <strong>${hs["Mã định danh của HS"]}</strong></div>
+          <div>❤️ Ngày sinh: <strong>${hs["Ngày tháng năm sinh"]}</strong></div>
+          <div>❤️ Nơi sinh: <strong>${hs["Nơi sinh (Huyện, tỉnh)"]}</strong></div>
+          <div>❤️ Nơi ở hiện tại: <strong>${hs["Nơi ở hiện tại"]}</strong></div>
+          <div>❤️ Chào mừng em là học sinh của lớp: <strong>${hs["Học lớp"]}</strong></div>
+          <div>❤️ Do cô giáo: <strong>${hs["Giáo viên chủ nhiệm"]}</strong> chủ nhiệm</div>
           
         `;
       } else {
