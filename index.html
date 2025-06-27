@@ -5,11 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tra cứu tuyển sinh - Tiểu học Hà Khẩu</title>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
     body {
       font-family: Arial, sans-serif;
-      background-color: #eef6fc;
+      background-image: url('background.jpg'); /* Thay ảnh nền tại đây */
+      background-size: cover;
+      background-position: center;
       padding: 20px;
-      margin: 0;
     }
 
     h1 {
@@ -17,11 +24,17 @@
       font-size: 26px;
       text-align: center;
       margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
     }
 
     .input-box {
       max-width: 400px;
       margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 10px;
     }
 
     input {
@@ -73,6 +86,9 @@
       font-size: 18px;
       text-align: center;
       color: #cc0000;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -86,7 +102,22 @@
   <div id="ketQua" class="result"></div>
   <div class="note">Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ số điện thoại: <strong>0906 162 184</strong></div>
 
+  <!-- Thư viện jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Thư viện ripple effect -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+
   <script>
+    // Kích hoạt hiệu ứng ripple trên body
+    $(document).ready(function () {
+      $('body').ripples({
+        resolution: 512,
+          dropRadius: 5,      // bán kính gợn nước (số càng lớn gợn càng to)
+          perturbance: 0.01,   // độ biến dạng (gần 0 = nhẹ, gần 1 = sóng mạnh)
+          interactive: true   // Người dùng có thể chạm để tạo sóng
+      });
+    });
+
     let duLieu = [];
 
     fetch('data.json')
@@ -111,10 +142,9 @@
           <div>🔸 Ngày sinh: <strong>${hs["Ngày tháng năm sinh"]}</strong></div>
           <div>🔸 Nơi sinh: <strong>${hs["Nơi sinh (Huyện, tỉnh)"]}</strong></div>
           <div>🔸 Nơi ở hiện tại: <strong>${hs["Nơi ở hiện tại"]}</strong></div>
-          <div>❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
-          <div>❤️ Chào mừng em là học sinh của lớp: <strong>${hs["Học lớp"]}</strong></div>
-          <div>❤️ Do cô giáo: <strong>${hs["Giáo viên chủ nhiệm"]}</strong> chủ nhiệm</div>
-          
+          <div>❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
+          <div>❤️ Chào mừng em <strong>${hs["Họ tên"]}</strong> là học sinh của lớp: <strong>${hs["Học lớp"]}</strong>❤️</div>
+          <div>❤️ Do cô giáo: <strong>${hs["Giáo viên chủ nhiệm"]}</strong> chủ nhiệm❤️</div>
         `;
       } else {
         ketQua.innerHTML = "<div>❗Không tìm thấy học sinh. Vui lòng kiểm tra lại họ tên và mã định danh.</div>";
